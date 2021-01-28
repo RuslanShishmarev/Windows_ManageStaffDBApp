@@ -1,0 +1,103 @@
+﻿<Window x:Class="ManageStaffDBApp.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageStaffDBApp.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" SelectedItem="{Binding SelectedTabItem}"> 
+            <TabItem Name="UsersTab">
+                <TabItem.Header>
+                    <TextBlock Text="Staff"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактировать" Command="{Binding OpenEditItemWnd}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllUsers" ItemsSource="{Binding AllUsers}"
+                          SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name"                                            
+                                            DisplayMemberBinding="{Binding Path=Name}"/>
+                            <GridViewColumn Header="SurName"
+                                            DisplayMemberBinding="{Binding Path=SurName}"/>
+                            <GridViewColumn Header="Phone"
+                                            DisplayMemberBinding="{Binding Path=Phone}"/>
+                            <GridViewColumn Header="Salary"
+                                            DisplayMemberBinding="{Binding Path=UserPosition.Salary}"/>
+                            <GridViewColumn Header="Position"
+                                            DisplayMemberBinding="{Binding Path=UserPosition.Name}"/>
+                            <GridViewColumn Header="Department"
+                                            DisplayMemberBinding="{Binding Path=UserPosition.PositionDepartment.Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Name="PositionsTab">
+                <TabItem.Header>
+                    <TextBlock Text="Positions"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактировать" Command="{Binding OpenEditItemWnd}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllPositions" ItemsSource="{Binding AllPositions}"
+                          SelectedItem="{Binding SelectedPosition}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name"
+                                            DisplayMemberBinding="{Binding Path=Name}"/>
+                            <GridViewColumn Header="Salary"
+                                            DisplayMemberBinding="{Binding Path=Salary}"/>
+                            <GridViewColumn Header="Count of staffs"
+                                            DisplayMemberBinding="{Binding Path=PositionUsers.Count}"/>
+                            <GridViewColumn Header="Max number"
+                                            DisplayMemberBinding="{Binding Path=MaxNumber}"/>
+                            <GridViewColumn Header="Department"
+                                            DisplayMemberBinding="{Binding Path=PositionDepartment.Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+            <TabItem Name="DepartmentsTab">
+                <TabItem.Header>
+                    <TextBlock Text="Depatrments"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактировать" Command="{Binding OpenEditItemWnd}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllDepartments" ItemsSource="{Binding AllDepartments}"
+                          SelectedItem="{Binding SelectedDepartment}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" 
+                                            DisplayMemberBinding="{Binding Path=Name}"/>
+                            <GridViewColumn Header="Count of positions" 
+                                            DisplayMemberBinding="{Binding Path=DepartmentPositions.Count}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Row="1" Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="Новый сотрудник" Command="{Binding OpenAddNewUserWnd}"/>
+            <Button Content="Новая позиция" Command="{Binding OpenAddNewPositionWnd}"/>
+            <Button Content="Новый отдел" Command="{Binding OpenAddNewDepartmentWnd}"/>
+        </StackPanel>
+    </Grid>
+</Window>

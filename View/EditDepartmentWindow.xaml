@@ -1,0 +1,26 @@
+﻿<Window x:Class="ManageStaffDBApp.View.EditDepartmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ManageStaffDBApp.View"
+        mc:Ignorable="d"
+        Title="EditDepartmentWindow" Height="300" Width="300"
+        Name="EditDepartmentWnd">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="200">
+            <TextBlock Text="New name"/>
+            <TextBox Text="{Binding DepartmentName}"/>
+        </StackPanel>
+        <Button Grid.Row="1" Content="Edit department"
+                Command="{Binding EditDepartment}"
+                CommandParameter="{Binding ElementName=EditDepartmentWnd}"/>
+    </Grid>
+</Window>
